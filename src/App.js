@@ -23,7 +23,14 @@ function App() {
         </ul>
       </header>
       <div className="contant">
-        <h1>Все кроссовки</h1>
+        <div>
+          {" "}
+          <h1>Все кроссовки</h1>
+          <div className="searchBlock">
+            <img src="/img/search.svg" alt="Search" />
+            <input placeholder="Поиск..." />
+          </div>
+        </div>
         <div className="sneakersWrapper">
           <div className="card">
             <img
