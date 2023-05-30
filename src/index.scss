@@ -100,59 +100,7 @@ header {
 
   .sneakersWrapper {
     display: flex;
-
-    .card {
-      border: 1px solid #f3f3f3;
-      border-radius: 40px;
-      padding: 20px;
-      width: 210px;
-      margin-right: 30px;
-      transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-      &:hover {
-        box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.05);
-        transform: translateY(-5px);
-      }
-      .favorite {
-        position: absolute;
-        cursor: pointer;
-      }
-      h5 {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        color: #000000;
-        margin: 14px 0px 14px 0px;
-      }
-      .cardPriceWrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .cardPrice {
-          display: flex;
-          flex-direction: column;
-          span {
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 500;
-            font-size: 11px;
-            line-height: 13px;
-            text-transform: uppercase;
-            color: #bdbdbd;
-          }
-        }
-        .cardBtn {
-          background: #e2e2e2;
-          border: 1px solid #f2f2f2;
-          border-radius: 8px;
-          width: 32px;
-          height: 32px;
-          cursor: pointer;
-        }
-      }
-    }
+    flex-wrap: wrap;
   }
 }
 .overlay {
