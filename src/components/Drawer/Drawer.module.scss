@@ -9,7 +9,6 @@
 }
 .drawer {
   display: flex;
-
   flex-direction: column;
   position: absolute;
   padding: 30px;
@@ -49,6 +48,7 @@
     .cartItem {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       width: 325px;
       height: 119px;
       background: #ffffff;
@@ -56,6 +56,16 @@
       border-radius: 20px;
       overflow: hidden;
       margin-bottom: 20px;
+
+      .cartItemImg {
+        width: 156px;
+        height: 70px;
+        background-size: cover;
+        background-position: 0 -7px;
+        background-repeat: no-repeat;
+        margin-right: 9px;
+        margin-left: 5px;
+      }
     }
     p {
       margin-bottom: 5px;

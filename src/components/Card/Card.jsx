@@ -2,10 +2,11 @@ import React from "react";
 import { useState } from "react";
 import stylesCard from "./Card.module.scss";
 
-function Card(props) {
+function Card({ name, imageURL, price, onClickPlus, onClickFavorite }) {
   const [isAdd, setIsAdd] = useState(false);
 
   const handlerPlus = () => {
+    onClickPlus();
     setIsAdd(!isAdd);
   };
 
@@ -15,19 +16,19 @@ function Card(props) {
         <div
           className={stylesCard.favorite}
           onClick={() => {
-            props.onClickFavorite();
+            onClickFavorite();
           }}
         >
           {" "}
           <img src="/img/heart_off.svg" alt="heart_off" />
         </div>
-        <img width={133} height={112} src={props.imageURL} alt="Sneakers" />
-        <h5>{props.name}</h5>
+        <img width={133} height={112} src={imageURL} alt="Sneakers" />
+        <h5>{name}</h5>
         <div className={stylesCard.cardPriceWrapper}>
           <div className={stylesCard.cardPrice}>
             {" "}
             <span>Цена:</span>
-            <b>{props.price} руб.</b>
+            <b>{price} руб.</b>
           </div>
 
           <img

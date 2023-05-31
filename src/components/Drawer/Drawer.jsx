@@ -1,6 +1,6 @@
 import React from "react";
 import stylesDrawer from "./Drawer.module.scss";
-function Drawer(props) {
+function Drawer({ onClickCloseCart, items = [] }) {
   return (
     <div className={stylesDrawer.overlay}>
       <div className={stylesDrawer.drawer}>
@@ -10,7 +10,7 @@ function Drawer(props) {
           <div className={stylesDrawer.exit}>
             {" "}
             <img
-              onClick={props.onClickCloseCart}
+              onClick={onClickCloseCart}
               className={stylesDrawer.btnRemove}
               src="/img/btn_exit.svg"
               alt="Exit"
@@ -18,38 +18,26 @@ function Drawer(props) {
           </div>
         </div>
         <div className={stylesDrawer.cartItemContainer}>
-          <div className={stylesDrawer.cartItem}>
-            <img
-              width={70}
-              height={70}
-              src="/img/sneakers/sneakers_2.jpg"
-              alt="Sneakers"
-            />
-            <div>
-              <p>Мужские Кроссовки Nike Air Max 270</p> <b>12 999 руб.</b>
+          {items.map((obj) => (
+            <div className={stylesDrawer.cartItem}>
+              <div
+                className={stylesDrawer.cartItemImg}
+                style={{
+                  backgroundImage: `url(${obj.imageURL})`,
+                }}
+                alt="Sneakers"
+              />
+
+              <div>
+                <p>{obj.name}</p> <b>{obj.price} руб.</b>
+              </div>
+              <img
+                className={stylesDrawer.btnRemove}
+                src="/img/btn_remove.svg"
+                alt="Remove"
+              />
             </div>
-            <img
-              className={stylesDrawer.btnRemove}
-              src="/img/btn_remove.svg"
-              alt="Remove"
-            />
-          </div>
-          <div className={stylesDrawer.cartItem}>
-            <img
-              width={70}
-              height={70}
-              src="/img/sneakers/sneakers_2.jpg"
-              alt="Sneakers"
-            />
-            <div>
-              <p>Мужские Кроссовки Nike Air Max 270</p> <b>12 999 руб.</b>
-            </div>
-            <img
-              className={stylesDrawer.btnRemove}
-              src="/img/btn_remove.svg"
-              alt="Remove"
-            />
-          </div>{" "}
+          ))}
         </div>
         <div className={stylesDrawer.cartTotalBlock}>
           <ul>
