@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Card from "./components/Card/Card";
-import Drawer from "./components/Drawer";
-import Header from "./components/Header";
+import Drawer from "./components/Drawer/Drawer";
+import Header from "./components/Header/Header";
+import stylesCard from "./components/Card/Card.module.scss";
 
 function App() {
+  const [cartOpened, setCartOpened] = useState(false);
   const arr = [
     {
       name: "Мужские Кроссовки Nike Blazer Mid Suede",
@@ -67,10 +70,19 @@ function App() {
   ];
   return (
     <div className="wrapper">
-      <div style={{ display: "none" }} className="overlay">
-        <Drawer />
-      </div>
-      <Header />
+      {cartOpened ? (
+        <Drawer
+          onClickCloseCart={() => {
+            setCartOpened(!cartOpened);
+          }}
+        />
+      ) : null}
+      {/* cart - это корзина */}
+      <Header
+        onClickCart={() => {
+          setCartOpened(!cartOpened);
+        }}
+      />
       <div className="contant">
         <div className="searchWrapper">
           {" "}
@@ -80,13 +92,14 @@ function App() {
             <input placeholder="Поиск..." />
           </div>
         </div>
-        <div className="sneakersWrapper">
+        <div className={stylesCard.sneakersWrapper}>
           {arr.map((item) => (
             <Card
               name={item.name}
               price={item.price}
               imageURL={item.imageURL}
-              onClick={() => console.log(item)}
+              onClickFavorite={() => console.log("Добавили в закладки")}
+              onClickPlus={() => console.log("Нажали плюс")}
             />
           ))}
         </div>
