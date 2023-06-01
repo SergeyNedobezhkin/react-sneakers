@@ -4,7 +4,7 @@ function Header(props) {
   return (
     <header>
       <div className={stylesHeader.headerLeft}>
-        <img width={40} height={40} src="/img/logo.png" />
+        <img width={40} height={40} src="/img/logo.png" alt="Logo" />
         <div className={stylesHeader.headerInfo}>
           <h3 className={stylesHeader.headerInfoTitle}>React Sneakers</h3>
           <p>Магазин лучших кросовок</p>
@@ -14,12 +14,12 @@ function Header(props) {
       <ul className={stylesHeader.headerRight}>
         <li onClick={props.onClickCart}>
           {" "}
-          <img width={18} height={18} src="/img/cart.svg" />
+          <img width={18} height={18} src="/img/cart.svg" alt="Cart" />
           <span>1205руб.</span>
         </li>
         <li>
           {" "}
-          <img width={18} height={18} src="/img/user.svg" />
+          <img width={18} height={18} src="/img/user.svg" alt="User" />
         </li>
       </ul>
     </header>
