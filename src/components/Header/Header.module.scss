@@ -23,9 +23,29 @@ header {
     img {
       margin-right: 10px;
     }
+    .favoriteHeader {
+      margin-right: 20px;
+      cursor: pointer;
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
     li:first-child {
       margin-right: 30px;
       cursor: pointer;
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    li:last-child {
+      cursor: pointer;
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

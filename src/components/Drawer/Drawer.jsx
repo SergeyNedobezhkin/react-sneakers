@@ -21,7 +21,7 @@ function Drawer({ onRemove, onClickCloseCart, items = [] }) {
         {items.length > 0 ? (
           <div className={stylesDrawer.cartItemContainer}>
             {items.map((obj) => (
-              <div className={stylesDrawer.cartItem}>
+              <div key={obj.id} className={stylesDrawer.cartItem}>
                 <div
                   className={stylesDrawer.cartItemImg}
                   style={{
