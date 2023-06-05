@@ -36,7 +36,6 @@ function App() {
   }, []);
 
   const onAddToCart = (item) => {
-    // console.log(item);
     try {
       if (cartItems.find((cartObj) => Number(cartObj.id) === Number(item.id))) {
         axios.delete(
@@ -86,6 +85,9 @@ function App() {
   };
 
   const isItemAdded = (id) => {
+    // return console.log(
+    //   cartItems.find((cartObj) => Number(cartObj.id) === Number(id))
+    // );
     return cartItems.find((cartObj) => Number(cartObj.id) === Number(id));
   };
   return (

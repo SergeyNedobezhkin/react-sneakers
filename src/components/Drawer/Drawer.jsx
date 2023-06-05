@@ -9,13 +9,15 @@ function Drawer({ onRemove, items = [] }) {
   const { cartItems, setCartOpened, cartOpened, setCartItems } =
     useContext(AppContext);
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+
+  const totalPrice = cartItems.reduce((acc, obj) => obj.price + acc, 0);
+
   const onClickOrder = () => {
     try {
       sessionStorage.setItem(
         items.map((item) => "id: " + item.id),
         JSON.stringify({ items: cartItems })
       );
-      // axios.put(`https://64774eb29233e82dd53b6aad.mockapi.io/cart`, []);
       setIsOrderCompleted(true);
       setCartItems([]);
       cartItems.forEach((item) => {
@@ -74,12 +76,12 @@ function Drawer({ onRemove, items = [] }) {
                 <li>
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 498 руб.</b>
+                  <b>{`${totalPrice}`} руб.</b>
                 </li>
                 <li>
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{`${Math.floor((totalPrice / 100) * 5)} `} руб.</b>
                 </li>
               </ul>
               <button onClick={onClickOrder}>Оформить заказ</button>

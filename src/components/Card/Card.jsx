@@ -10,7 +10,7 @@ function Card({
   imageURL,
   price,
   onClickPlus,
-  // onFavorite,
+
   favorited = false,
   loading = false,
 }) {
@@ -71,7 +71,9 @@ function Card({
                   handlerPlus();
                 }}
                 src={
-                  isItemAdded(id) ? "/img/btn_checked.svg" : "/img/btn_plus.svg"
+                  isItemAdded(id)
+                    ? "/img/btn_checkedOff.svg"
+                    : "/img/btn_plus.svg"
                 }
                 alt="Plus"
               />

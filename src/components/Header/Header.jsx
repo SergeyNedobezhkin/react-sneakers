@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import stylesHeader from "./Header.module.scss";
+import AppContext from "../../context";
 function Header(props) {
+  const { cartItems } = useContext(AppContext);
+  const totalPrice = cartItems.reduce((acc, obj) => obj.price + acc, 0);
   return (
     <header>
       <Link to="http://localhost:3000/">
@@ -18,7 +21,7 @@ function Header(props) {
         <li onClick={props.onClickCart}>
           {" "}
           <img width={18} height={18} src="/img/cart.svg" alt="Cart" />
-          <span>1205руб.</span>
+          <span>{`${totalPrice}`} руб.</span>
         </li>
         <li className={stylesHeader.favoriteHeader}>
           {" "}
@@ -37,6 +40,3 @@ function Header(props) {
 }
 
 export default Header;
-{
-  /* <img src={isFavorite ? "/img/heart_on.svg" : "/img/heart_off.svg"} /> */
-}

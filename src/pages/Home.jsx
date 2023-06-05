@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Card from "../components/Card/Card";
 import stylesCard from "../components/Card/Card.module.scss";
 import stylesDrawer from "../components/Drawer/Drawer.module.scss";
+import AppContext from "../context";
 
 function Home({
   searchValue,
@@ -14,7 +15,6 @@ function Home({
   isLoading,
 }) {
   //  есть бак при добавлении карты и затем удалении ее в корзине остается одна карта
-
   const renderItems = () => {
     const filtredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -22,7 +22,6 @@ function Home({
     return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card
         key={index}
-        // onFavorite={(item) => onAddToFavorite(item)}
         onClickPlus={(item) => onAddToCart(item)}
         loading={isLoading}
         //передал все ключи объекта через {...item};
