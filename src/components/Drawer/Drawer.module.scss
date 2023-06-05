@@ -42,12 +42,12 @@
   }
 
   .cartItemContainer {
-    flex-grow: 1;
     overflow: auto;
     margin-bottom: 50px;
-
+    flex: 1;
     .cartItem {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
       width: 325px;
@@ -92,6 +92,7 @@
       }
     }
   }
+
   .cartEmpty {
     display: flex;
     justify-content: center;

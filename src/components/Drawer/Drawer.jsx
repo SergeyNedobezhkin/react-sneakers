@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+
 import stylesDrawer from "./Drawer.module.scss";
-function Drawer({ onRemove, onClickCloseCart, items = [] }) {
+import Info from "../Info";
+import { useContext } from "react";
+import AppContext from "../../context";
+import axios from "axios";
+function Drawer({ onRemove, items = [] }) {
+  const { cartItems, setCartOpened, cartOpened, setCartItems } =
+    useContext(AppContext);
+  const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+  const onClickOrder = () => {
+    try {
+      sessionStorage.setItem(
+        items.map((item) => "id: " + item.id),
+        JSON.stringify({ items: cartItems })
+      );
+      // axios.put(`https://64774eb29233e82dd53b6aad.mockapi.io/cart`, []);
+      setIsOrderCompleted(true);
+      setCartItems([]);
+      cartItems.forEach((item) => {
+        axios.delete(
+          `https://64774eb29233e82dd53b6aad.mockapi.io/cart/` + item.id
+        );
+      });
+    } catch (error) {
+      alert("Ошибка оформления заказа!!!");
+    }
+  };
   return (
     <div className={stylesDrawer.overlay}>
       <div className={stylesDrawer.drawer}>
@@ -10,37 +36,39 @@ function Drawer({ onRemove, onClickCloseCart, items = [] }) {
           <div className={stylesDrawer.exit}>
             {" "}
             <img
-              onClick={onClickCloseCart}
+              onClick={() => setCartOpened(!cartOpened)}
               className={stylesDrawer.btnRemove}
               src="/img/btn_exit.svg"
               alt="Exit"
             />
           </div>
-        </div>
-
+        </div>{" "}
         {items.length > 0 ? (
-          <div className={stylesDrawer.cartItemContainer}>
-            {items.map((obj) => (
-              <div key={obj.id} className={stylesDrawer.cartItem}>
-                <div
-                  className={stylesDrawer.cartItemImg}
-                  style={{
-                    backgroundImage: `url(${obj.imageURL})`,
-                  }}
-                  alt="Sneakers"
-                />
+          <>
+            <div className={stylesDrawer.cartItemContainer}>
+              {items.map((obj) => (
+                <div key={obj.id} className={stylesDrawer.cartItem}>
+                  <div
+                    className={stylesDrawer.cartItemImg}
+                    style={{
+                      backgroundImage: `url(${obj.imageURL})`,
+                    }}
+                    alt="Sneakers"
+                  />
 
-                <div>
-                  <p>{obj.name}</p> <b>{obj.price} руб.</b>
+                  <div>
+                    <p>{obj.name}</p> <b>{obj.price} руб.</b>
+                  </div>
+                  <img
+                    className={stylesDrawer.btnRemove}
+                    onClick={() => onRemove(obj.id)}
+                    src="/img/btn_remove.svg"
+                    alt="Remove"
+                  />
                 </div>
-                <img
-                  className={stylesDrawer.btnRemove}
-                  onClick={() => onRemove(obj.id)}
-                  src="/img/btn_remove.svg"
-                  alt="Remove"
-                />
-              </div>
-            ))}
+              ))}
+            </div>
+
             <div className={stylesDrawer.cartTotalBlock}>
               <ul>
                 <li>
@@ -54,69 +82,22 @@ function Drawer({ onRemove, onClickCloseCart, items = [] }) {
                   <b>1074 руб.</b>
                 </li>
               </ul>
-              <button>Оформить заказ</button>
+              <button onClick={onClickOrder}>Оформить заказ</button>
             </div>
-          </div>
+          </>
         ) : (
-          <div className={stylesDrawer.cartEmpty}>
-            <div className={stylesDrawer.cartEmptyContainer}>
-              <img src="/img/cartEmpty.svg" alt="Empty" />
-              <h3>
-                <b>Корзина пустая</b>
-              </h3>
-              <h5>Добавьте в корзину товар</h5>
-              <button onClick={onClickCloseCart}>Вернуться назад</button>
-            </div>
-          </div>
+          <Info
+            title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
+            description={
+              isOrderCompleted
+                ? "Ваш заказ скоро будет передан курьерской доставке"
+                : "Добавьте товар в корзину."
+            }
+            image={
+              isOrderCompleted ? "/img/completeOrder.svg" : "/img/cartEmpty.svg"
+            }
+          />
         )}
-        {/* <div className={stylesDrawer.cartEmpty}>
-          <div className={stylesDrawer.cartEmptyContainer}>
-            <img src="/img/cartEmpty.svg" alt="Empty" />
-            <h3>
-              <b>Корзина пустая</b>
-            </h3>
-            <button>Вернуться назад</button>
-          </div>
-        </div> */}
-
-        {/* <div className={stylesDrawer.cartItemContainer}>
-          {items.map((obj) => (
-            <div className={stylesDrawer.cartItem}>
-              <div
-                className={stylesDrawer.cartItemImg}
-                style={{
-                  backgroundImage: `url(${obj.imageURL})`,
-                }}
-                alt="Sneakers"
-              />
-
-              <div>
-                <p>{obj.name}</p> <b>{obj.price} руб.</b>
-              </div>
-              <img
-                className={stylesDrawer.btnRemove}
-                onClick={() => onRemove(obj.id)}
-                src="/img/btn_remove.svg"
-                alt="Remove"
-              />
-            </div>
-          ))}
-        </div> */}
-        {/* <div className={stylesDrawer.cartTotalBlock}>
-          <ul>
-            <li>
-              <span>Итого:</span>
-              <div></div>
-              <b>21 498 руб.</b>
-            </li>
-            <li>
-              <span>Налог 5%:</span>
-              <div></div>
-              <b>1074 руб.</b>
-            </li>
-          </ul>
-          <button>Оформить заказ</button>
-        </div> */}
       </div>
     </div>
   );

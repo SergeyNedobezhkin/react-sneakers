@@ -4,8 +4,8 @@ import Card from "../components/Card/Card";
 import AppContext from "../context";
 import stylesCard from "../components/Card/Card.module.scss";
 import stylesDrawer from "../components/Drawer/Drawer.module.scss";
-function Favorites({ onAddToFavorite }) {
-  const { favorites } = useContext(AppContext);
+function Favorites() {
+  const { favorites, onAddToFavorite } = useContext(AppContext);
 
   return (
     <div className="contant">
@@ -18,12 +18,10 @@ function Favorites({ onAddToFavorite }) {
         {favorites.map((item) => (
           <Card
             key={item.id}
-            name={item.name}
-            price={item.price}
-            imageURL={item.imageURL}
             onFavorite={onAddToFavorite}
-            id={item.id}
+            favorited={true}
             added
+            {...item}
           />
         ))}
       </div>

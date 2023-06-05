@@ -71,8 +71,8 @@ function App() {
   // onAddToFavorite  При отправке кросовок в избранное происходит добавление в local Storage, так как ограничение бесплатного сервера.
   const onAddToFavorite = (obj) => {
     try {
-      if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
-        localStorage.removeItem(obj.id);
+      if (favorites.find((favObj) => Number(favObj.id) == Number(obj.id))) {
+        localStorage.removeItem(`${obj.id}`);
         setFavorites((prev) =>
           prev.filter((item) => Number(item.id) != Number(obj.id))
         );
@@ -85,18 +85,26 @@ function App() {
     }
   };
 
+  const isItemAdded = (id) => {
+    return cartItems.find((cartObj) => Number(cartObj.id) === Number(id));
+  };
   return (
-    <AppContext.Provider value={{ items, cartItems, favorites }}>
+    <AppContext.Provider
+      value={{
+        items,
+        cartItems,
+        favorites,
+        isItemAdded,
+        onAddToFavorite,
+        setCartOpened,
+        cartOpened,
+        setCartItems,
+      }}
+    >
       {" "}
       <div className="wrapper">
         {cartOpened ? (
-          <Drawer
-            items={cartItems}
-            onClickCloseCart={() => {
-              setCartOpened(!cartOpened);
-            }}
-            onRemove={onRemoveItemCart}
-          />
+          <Drawer items={cartItems} onRemove={onRemoveItemCart} />
         ) : null}
         {/* cart - это корзина */}
         <Header
@@ -116,7 +124,6 @@ function App() {
                 setSearchValue={setSearchValue}
                 onChangeSearchInput={onChangeSearchInput}
                 onAddToCart={onAddToCart}
-                onAddToFavorite={onAddToFavorite}
                 isLoading={isLoading}
               />
             }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "../components/Card/Card";
 import stylesCard from "../components/Card/Card.module.scss";
 import stylesDrawer from "../components/Drawer/Drawer.module.scss";
+
 function Home({
   searchValue,
   setSearchValue,
@@ -21,9 +22,8 @@ function Home({
     return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card
         key={index}
-        onFavorite={(item) => onAddToFavorite(item)}
+        // onFavorite={(item) => onAddToFavorite(item)}
         onClickPlus={(item) => onAddToCart(item)}
-        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         //передал все ключи объекта через {...item};
         {...item}

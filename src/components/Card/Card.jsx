@@ -1,6 +1,7 @@
 import React from "react";
+import AppContext from "../../context";
 import ContentLoader from "react-content-loader";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import stylesCard from "./Card.module.scss";
 
 function Card({
@@ -9,21 +10,20 @@ function Card({
   imageURL,
   price,
   onClickPlus,
-  onFavorite,
+  // onFavorite,
   favorited = false,
-  added = false,
   loading = false,
 }) {
-  const [isAdd, setIsAdd] = useState(added);
+  const { isItemAdded, onAddToFavorite } = useContext(AppContext);
+
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const handlerPlus = () => {
     onClickPlus({ id, name, imageURL, price });
-    setIsAdd(!isAdd);
   };
   // onClickFavorite  При добавлении кросовок в избранное происходит добавление в local Storage, так как ограничение бесплатного сервера.
   const onClickFavorite = () => {
-    onFavorite({ id, name, imageURL, price });
+    onAddToFavorite({ id, name, imageURL, price });
     setIsFavorite(!isFavorite);
   };
 
@@ -70,7 +70,9 @@ function Card({
                 onClick={() => {
                   handlerPlus();
                 }}
-                src={isAdd ? "/img/btn_checked.svg" : "/img/btn_plus.svg"}
+                src={
+                  isItemAdded(id) ? "/img/btn_checked.svg" : "/img/btn_plus.svg"
+                }
                 alt="Plus"
               />
             </div>
