@@ -14,10 +14,7 @@ function Drawer({ onRemove, items = [] }) {
 
   const onClickOrder = () => {
     try {
-      sessionStorage.setItem(
-        items.map((item) => "id: " + item.id),
-        JSON.stringify({ items: cartItems })
-      );
+      sessionStorage.setItem("key", JSON.stringify(cartItems));
       setIsOrderCompleted(true);
       setCartItems([]);
       cartItems.forEach((item) => {

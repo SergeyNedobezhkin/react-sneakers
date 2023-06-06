@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import stylesDrawer from "./Drawer/Drawer.module.scss";
 import AppContext from "../context";
 function Info({ image, title, description }) {
-  const { setCartOpened, cartOpened } = useContext(AppContext);
+  const { setCartOpened } = useContext(AppContext);
   return (
     <div>
       <div className={stylesDrawer.cartEmpty}>
@@ -12,9 +12,7 @@ function Info({ image, title, description }) {
             <b>{title}</b>
           </h3>
           <h5>{description}</h5>
-          <button onClick={() => setCartOpened(!cartOpened)}>
-            Вернуться назад!
-          </button>
+          <button onClick={() => setCartOpened(false)}>Вернуться назад!</button>
         </div>
       </div>
     </div>

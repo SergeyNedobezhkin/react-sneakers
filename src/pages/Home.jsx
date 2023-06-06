@@ -9,7 +9,6 @@ function Home({
   setSearchValue,
   onChangeSearchInput,
   items,
-  cartItems,
   onAddToCart,
   onAddToFavorite,
   isLoading,
@@ -22,7 +21,8 @@ function Home({
     return (isLoading ? [...Array(8)] : filtredItems).map((item, index) => (
       <Card
         key={index}
-        onClickPlus={(item) => onAddToCart(item)}
+        onPlus={(item) => onAddToCart(item)}
+        onFavorite={(item) => onAddToFavorite(item)}
         loading={isLoading}
         //передал все ключи объекта через {...item};
         {...item}

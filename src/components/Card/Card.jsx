@@ -9,8 +9,8 @@ function Card({
   name,
   imageURL,
   price,
-  onClickPlus,
-
+  onPlus,
+  onFavorite,
   favorited = false,
   loading = false,
 }) {
@@ -19,11 +19,11 @@ function Card({
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const handlerPlus = () => {
-    onClickPlus({ id, name, imageURL, price });
+    onPlus({ id, name, imageURL, price });
   };
   // onClickFavorite  При добавлении кросовок в избранное происходит добавление в local Storage, так как ограничение бесплатного сервера.
   const onClickFavorite = () => {
-    onAddToFavorite({ id, name, imageURL, price });
+    onFavorite({ id, name, imageURL, price });
     setIsFavorite(!isFavorite);
   };
 
@@ -47,15 +47,17 @@ function Card({
           </ContentLoader>
         ) : (
           <>
-            <div
-              className={stylesCard.favorite}
-              onClick={() => onClickFavorite()}
-            >
-              {" "}
-              <img
-                src={isFavorite ? "/img/heart_on.svg" : "/img/heart_off.svg"}
-              />
-            </div>
+            {onFavorite && (
+              <div
+                className={stylesCard.favorite}
+                onClick={() => onClickFavorite()}
+              >
+                <img
+                  src={isFavorite ? "/img/heart_on.svg" : "/img/heart_off.svg"}
+                />
+              </div>
+            )}
+
             <img width={133} height={112} src={imageURL} alt="Sneakers" />
             <h5>{name}</h5>
             <div className={stylesCard.cardPriceWrapper}>
@@ -65,18 +67,18 @@ function Card({
                 <b>{price} руб.</b>
               </div>
 
-              <img
-                className={stylesCard.cardPlus}
-                onClick={() => {
-                  handlerPlus();
-                }}
-                src={
-                  isItemAdded(id)
-                    ? "/img/btn_checkedOff.svg"
-                    : "/img/btn_plus.svg"
-                }
-                alt="Plus"
-              />
+              {onPlus && (
+                <img
+                  className={stylesCard.cardPlus}
+                  onClick={handlerPlus}
+                  src={
+                    isItemAdded(id)
+                      ? "/img/btn_checkedOff.svg"
+                      : "/img/btn_plus.svg"
+                  }
+                  alt="Plus"
+                />
+              )}
             </div>
           </>
         )}

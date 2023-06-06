@@ -15,9 +15,9 @@ function Favorites() {
       </div>
       <div className={stylesCard.sneakersWrapper}>
         {" "}
-        {favorites.map((item) => (
+        {favorites.map((item, index) => (
           <Card
-            key={item.id}
+            key={index}
             onFavorite={onAddToFavorite}
             favorited={true}
             added

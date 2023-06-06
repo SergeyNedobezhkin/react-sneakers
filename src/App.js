@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -101,6 +102,7 @@ function App() {
         setCartOpened,
         cartOpened,
         setCartItems,
+        onAddToCart,
       }}
     >
       {" "}
@@ -111,7 +113,7 @@ function App() {
         {/* cart - это корзина */}
         <Header
           onClickCart={() => {
-            setCartOpened(!cartOpened);
+            setCartOpened(true);
           }}
         />
         <Routes>
@@ -125,6 +127,7 @@ function App() {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 onChangeSearchInput={onChangeSearchInput}
+                onAddToFavorite={onAddToFavorite}
                 onAddToCart={onAddToCart}
                 isLoading={isLoading}
               />
@@ -140,6 +143,7 @@ function App() {
               />
             }
           />
+          <Route path="/orders" exact element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>
