@@ -6,6 +6,7 @@ import stylesCard from "./Card.module.scss";
 
 function Card({
   id,
+
   name,
   imageURL,
   price,
@@ -14,16 +15,16 @@ function Card({
   favorited = false,
   loading = false,
 }) {
-  const { isItemAdded, onAddToFavorite } = useContext(AppContext);
-
+  const { isItemAdded } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(favorited);
 
+  const obj = { id, perentId: id, name, imageURL, price };
   const handlerPlus = () => {
-    onPlus({ id, name, imageURL, price });
+    onPlus(obj);
   };
   // onClickFavorite  При добавлении кросовок в избранное происходит добавление в local Storage, так как ограничение бесплатного сервера.
   const onClickFavorite = () => {
-    onFavorite({ id, name, imageURL, price });
+    onFavorite(obj);
     setIsFavorite(!isFavorite);
   };
 

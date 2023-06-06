@@ -14,6 +14,7 @@ function Drawer({ onRemove, items = [] }) {
 
   const onClickOrder = () => {
     try {
+      // onClickOrder  При оформлении заказа  происходит добавление в sessionStorage, так как есть ограничение от бесплатного сервера mockapi.
       sessionStorage.setItem("key", JSON.stringify(cartItems));
       setIsOrderCompleted(true);
       setCartItems([]);
