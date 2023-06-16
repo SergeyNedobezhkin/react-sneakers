@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/SergeyNedobezhkin/react-sneakers/static/css/main.81ac1bfa.css",
-    "main.js": "/SergeyNedobezhkin/react-sneakers/static/js/main.d0b473ee.js",
+    "main.js": "/SergeyNedobezhkin/react-sneakers/static/js/main.ae5498bd.js",
     "index.html": "/SergeyNedobezhkin/react-sneakers/index.html",
     "main.81ac1bfa.css.map": "/SergeyNedobezhkin/react-sneakers/static/css/main.81ac1bfa.css.map",
-    "main.d0b473ee.js.map": "/SergeyNedobezhkin/react-sneakers/static/js/main.d0b473ee.js.map"
+    "main.ae5498bd.js.map": "/SergeyNedobezhkin/react-sneakers/static/js/main.ae5498bd.js.map"
   },
   "entrypoints": [
     "static/css/main.81ac1bfa.css",
-    "static/js/main.d0b473ee.js"
+    "static/js/main.ae5498bd.js"
   ]
 }
