@@ -6,25 +6,29 @@ import { useContext } from "react";
 import AppContext from "../../context";
 import axios from "axios";
 function Drawer({ onRemove, items = [] }) {
-  const { cartItems, setCartOpened, cartOpened, setCartItems } =
+  const { cartItems, setCartOpened, cartOpened, setCartItems, totalPrice } =
     useContext(AppContext);
   const [isOrderCompleted, setIsOrderCompleted] = useState(false);
+  const [orderId, setOrderId] = useState(null);
 
-  const totalPrice = cartItems.reduce((acc, obj) => obj.price + acc, 0);
-
-  const onClickOrder = () => {
+  const onClickOrder = async () => {
     try {
-      // onClickOrder  При оформлении заказа  происходит добавление в sessionStorage, так как есть ограничение от бесплатного сервера mockapi.
-      sessionStorage.setItem("key", JSON.stringify(cartItems));
+      const { data } = await axios.post(
+        "https://26610614212e314e.mokky.ru/orders",
+        {
+          items: cartItems,
+        }
+      );
+      setOrderId(data.id);
       setIsOrderCompleted(true);
       setCartItems([]);
-      cartItems.forEach((item) => {
-        axios.delete(
-          `https://64774eb29233e82dd53b6aad.mockapi.io/cart/` + item.id
-        );
-      });
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete("https://26610614212e314e.mokky.ru/cart/" + item.id);
+      }
     } catch (error) {
-      alert("Ошибка оформления заказа!!!");
+      alert("Ошибка при создании заказа :(");
     }
   };
   return (
@@ -90,8 +94,8 @@ function Drawer({ onRemove, items = [] }) {
             title={isOrderCompleted ? "Заказ оформлен!" : "Корзина пустая"}
             description={
               isOrderCompleted
-                ? "Ваш заказ скоро будет передан курьерской доставке"
-                : "Добавьте товар в корзину."
+                ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
+                : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
             }
             image={
               isOrderCompleted ? "/img/completeOrder.svg" : "/img/cartEmpty.svg"
