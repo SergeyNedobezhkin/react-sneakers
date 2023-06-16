@@ -13,7 +13,6 @@ function Home({
   onAddToFavorite,
   isLoading,
 }) {
-  //  есть бак при добавлении карты и затем удалении ее в корзине остается одна карта
   const renderItems = () => {
     const filtredItems = items.filter((item) =>
       item.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -39,7 +38,7 @@ function Home({
             : "Все кроссовки"}
         </h1>
         <div className="searchBlock">
-          <img src="/img/search.svg" alt="Search" />
+          <img src="img/search.svg" alt="Search" />
           <input
             onChange={onChangeSearchInput}
             value={searchValue}
@@ -48,7 +47,7 @@ function Home({
           <img
             onClick={() => setSearchValue("")}
             className={stylesDrawer.btnRemove}
-            src="/img/btn_exit.svg"
+            src="img/btn_exit.svg"
             alt="Exit"
           />
         </div>

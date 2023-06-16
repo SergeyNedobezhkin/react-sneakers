@@ -22,7 +22,6 @@ function Card({
   const handlerPlus = () => {
     onPlus(obj);
   };
-  // onClickFavorite  При добавлении кросовок в избранное происходит добавление в local Storage, так как ограничение бесплатного сервера.
   const onClickFavorite = () => {
     onFavorite(obj);
     setIsFavorite(!isFavorite);
@@ -54,7 +53,7 @@ function Card({
                 onClick={() => onClickFavorite()}
               >
                 <img
-                  src={isFavorite ? "/img/heart_on.svg" : "/img/heart_off.svg"}
+                  src={isFavorite ? "img/heart_on.svg" : "img/heart_off.svg"}
                 />
               </div>
             )}
@@ -74,8 +73,8 @@ function Card({
                   onClick={handlerPlus}
                   src={
                     isItemAdded(id)
-                      ? "/img/btn_checkedOff.svg"
-                      : "/img/btn_plus.svg"
+                      ? "img/btn_checkedOff.svg"
+                      : "img/btn_plus.svg"
                   }
                   alt="Plus"
                 />
