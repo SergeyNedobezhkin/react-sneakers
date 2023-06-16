@@ -42,7 +42,7 @@ function Drawer({ onRemove, items = [] }) {
             <img
               onClick={() => setCartOpened(!cartOpened)}
               className={stylesDrawer.btnRemove}
-              src="img/btn_exit.svg"
+              src="/react-sneakers/img/btn_exit.svg"
               alt="Exit"
             />
           </div>
@@ -66,7 +66,7 @@ function Drawer({ onRemove, items = [] }) {
                   <img
                     className={stylesDrawer.btnRemove}
                     onClick={() => onRemove(obj.id)}
-                    src="img/btn_remove.svg"
+                    src="/react-sneakers/img/btn_remove.svg"
                     alt="Remove"
                   />
                 </div>
@@ -98,7 +98,9 @@ function Drawer({ onRemove, items = [] }) {
                 : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
             }
             image={
-              isOrderCompleted ? "img/completeOrder.svg" : "img/cartEmpty.svg"
+              isOrderCompleted
+                ? "react-sneakers/img/completeOrder.svg"
+                : "react-sneakers/img/cartEmpty.svg"
             }
           />
         )}

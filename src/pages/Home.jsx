@@ -38,7 +38,7 @@ function Home({
             : "Все кроссовки"}
         </h1>
         <div className="searchBlock">
-          <img src="img/search.svg" alt="Search" />
+          <img src="/react-sneakers/img/search.svg" alt="Search" />
           <input
             onChange={onChangeSearchInput}
             value={searchValue}
@@ -47,7 +47,7 @@ function Home({
           <img
             onClick={() => setSearchValue("")}
             className={stylesDrawer.btnRemove}
-            src="img/btn_exit.svg"
+            src="/react-sneakers/img/btn_exit.svg"
             alt="Exit"
           />
         </div>

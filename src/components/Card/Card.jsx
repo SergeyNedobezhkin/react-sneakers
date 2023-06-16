@@ -53,7 +53,11 @@ function Card({
                 onClick={() => onClickFavorite()}
               >
                 <img
-                  src={isFavorite ? "img/heart_on.svg" : "img/heart_off.svg"}
+                  src={
+                    isFavorite
+                      ? "/react-sneakers/img/heart_on.svg"
+                      : "/react-sneakers/img/heart_off.svg"
+                  }
                 />
               </div>
             )}
@@ -73,8 +77,8 @@ function Card({
                   onClick={handlerPlus}
                   src={
                     isItemAdded(id)
-                      ? "img/btn_checkedOff.svg"
-                      : "img/btn_plus.svg"
+                      ? "/react-sneakers/img/btn_checkedOff.svg"
+                      : "/react-sneakers/img/btn_plus.svg"
                   }
                   alt="Plus"
                 />

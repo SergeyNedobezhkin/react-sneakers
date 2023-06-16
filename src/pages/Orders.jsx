@@ -2,27 +2,24 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/Card/Card";
 import stylesCard from "../components/Card/Card.module.scss";
-import { useContext } from "react";
-import AppContext from "../context";
 
 function Orders() {
-  const { onAddToCart, onAddToFavorite } = useContext(AppContext);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      setIsLoading(true);
-      let orderStr = sessionStorage.getItem("key");
-      let orderArr = JSON.parse(orderStr);
-      console.log(orderArr);
-      setOrders(orderArr.map((obj) => obj));
-      setIsLoading(false);
-    } catch (error) {
-      alert("Список заказов пуст!");
-      setIsLoading(false);
-      console.error(error);
-    }
+    (async () => {
+      try {
+        const { data } = await axios.get(
+          "https://26610614212e314e.mokky.ru/orders"
+        );
+        setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
+        setIsLoading(false);
+      } catch (error) {
+        alert("Ошибка при запросе заказов");
+        console.error(error);
+      }
+    })();
   }, []);
 
   return (
