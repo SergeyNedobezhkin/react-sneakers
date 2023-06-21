@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import stylesHeader from "./Header.module.scss";
 import AppContext from "../../context";
+
 function Header(props) {
   const { cartItems } = useContext(AppContext);
   const totalPrice = cartItems.reduce((acc, obj) => obj.price + acc, 0);
+
   return (
     <header>
       <Link to="/">

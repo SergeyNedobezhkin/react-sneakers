@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import stylesDrawer from "./Drawer.module.scss";
 import Info from "../Info";
 import { useContext } from "react";
 import AppContext from "../../context";
 import axios from "axios";
+
 function Drawer({ onRemove, items = [] }) {
   const { cartItems, setCartOpened, cartOpened, setCartItems, totalPrice } =
     useContext(AppContext);
@@ -31,6 +31,7 @@ function Drawer({ onRemove, items = [] }) {
       alert("Ошибка при создании заказа :(");
     }
   };
+
   return (
     <div className={stylesDrawer.overlay}>
       <div className={stylesDrawer.drawer}>
@@ -72,7 +73,6 @@ function Drawer({ onRemove, items = [] }) {
                 </div>
               ))}
             </div>
-
             <div className={stylesDrawer.cartTotalBlock}>
               <ul>
                 <li>

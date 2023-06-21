@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import stylesDrawer from "./Drawer/Drawer.module.scss";
 import AppContext from "../context";
+
 function Info({ image, title, description }) {
   const { setCartOpened } = useContext(AppContext);
   return (

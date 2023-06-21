@@ -1,13 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { createContext, useState } from "react";
-import { useEffect } from "react";
+import {  useEffect, useState } from "react";
 import axios from "axios";
 import AppContext from "./context";
-
-import Home from "./pages/Home";
 import Drawer from "./components/Drawer/Drawer";
 import Header from "./components/Header/Header";
+import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
 
@@ -65,6 +63,7 @@ function App() {
       alert("Не удалось добавить в корзину!");
     }
   };
+
   const onRemoveItemCart = async (id) => {
     try {
       setCartItems((prev) =>
@@ -117,11 +116,9 @@ function App() {
         cartOpened,
         setCartItems,
         onAddToCart,
-
         totalPrice,
       }}
     >
-      {" "}
       <div className="wrapper">
         {cartOpened ? (
           <Drawer items={cartItems} onRemove={onRemoveItemCart} />

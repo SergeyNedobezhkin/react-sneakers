@@ -6,7 +6,6 @@ import stylesCard from "./Card.module.scss";
 
 function Card({
   id,
-
   name,
   imageURL,
   price,
@@ -17,11 +16,12 @@ function Card({
 }) {
   const { isItemAdded } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(favorited);
-
   const obj = { id, perentId: id, name, imageURL, price };
+
   const handlerPlus = () => {
     onPlus(obj);
   };
+
   const onClickFavorite = () => {
     onFavorite(obj);
     setIsFavorite(!isFavorite);
@@ -61,7 +61,6 @@ function Card({
                 />
               </div>
             )}
-
             <img width={133} height={112} src={imageURL} alt="Sneakers" />
             <h5>{name}</h5>
             <div className={stylesCard.cardPriceWrapper}>
@@ -70,7 +69,6 @@ function Card({
                 <span>Цена:</span>
                 <b>{price} руб.</b>
               </div>
-
               {onPlus && (
                 <img
                   className={stylesCard.cardPlus}
